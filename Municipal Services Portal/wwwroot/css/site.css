@@ -20,3 +20,39 @@ html {
 body {
   margin-bottom: 60px;
 }
+:root {
+    --primary-color: #00008B;
+}
+.navbar{
+
+    background-color: var(--primary-color);
+    color: white;
+}
+.full-width-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 100px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.full-width-section2 {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    background-color: white;
+    color: var(--primary-color);
+    padding: 100px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+    .full-width-section {
+        padding: 20px 10px;
+    }
+}
+
