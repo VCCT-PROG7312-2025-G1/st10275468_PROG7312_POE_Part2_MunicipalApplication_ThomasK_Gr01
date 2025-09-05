@@ -9,7 +9,7 @@
         public DateTime DateSubmitted { get; set; }
         public string Status {  get; set; }
 
-        public Issue(string location, string category, string description, string mediaPath, DateTime dateSubmitted, string status)
+        public Issue(string location, string category, string description, string mediaPath)
         {
             Location = location;
             Category = category;
@@ -18,6 +18,7 @@
             DateSubmitted = DateTime.Now;
             Status = "Pending";
         }
+
 
     }
 }
