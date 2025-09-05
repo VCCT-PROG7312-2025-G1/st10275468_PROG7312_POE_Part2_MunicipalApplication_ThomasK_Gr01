@@ -4,7 +4,7 @@ namespace Municipal_Services_Portal.Controllers
 {
     public class ReportIssueController : Controller
     {
-        public IActionResult Index()
+        public IActionResult ReportIssue()
         {
             return View();
         }
