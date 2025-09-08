@@ -7,4 +7,8 @@
     <RootNamespace>Municipal_Services_Portal</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\IssueImages\" />
+  </ItemGroup>
+
 </Project>

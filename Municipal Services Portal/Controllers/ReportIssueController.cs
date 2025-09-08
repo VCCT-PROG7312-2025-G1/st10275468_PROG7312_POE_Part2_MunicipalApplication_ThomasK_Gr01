@@ -8,6 +8,7 @@ namespace Municipal_Services_Portal.Controllers
 
         private static IssueLinkedList issues = new IssueLinkedList();
 
+        [HttpGet]
         public IActionResult ReportIssues()
         {
             return View();
@@ -42,5 +43,13 @@ namespace Municipal_Services_Portal.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ViewIssues()
+        {
+            Issue[] issueArray = issues.ToArray();
+            return View(issueArray);
+        }
+
     }
 }
