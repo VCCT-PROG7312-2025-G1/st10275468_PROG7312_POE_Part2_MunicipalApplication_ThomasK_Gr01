@@ -12,25 +12,28 @@
         <div class="cards-wrapper">
             <div class="report-card">
                 <h5>Submit Your Issue</h5>
-                <form asp-action="ReportIssues" method="post" enctype="multipart/form-data">
+                <div id="successMessage" class="alert alert-success text-center"
+                     style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:80%; z-index:10; opacity:1;">
+                </div>
+                <form id="reportForm" asp-action="ReportIssues" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Location</label>
-                        <input type="text" id="location" name="location" class="form-control" placeholder="Enter Location" />
+                        <input type="text" id="location" name="location" class="form-control" placeholder="Enter Location" required />
                         <small class="text-muted">Example: 123 Main Street</small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Category</label>
-                        <select id="category" name="category" class="form-select">
+                        <select id="category" name="category" class="form-select" required>
                             <option value="">Select a category</option>
                             <option value="TestCategory">TestCategory</option>
                         </select>
                         <small class="text-muted">Choose the type of issue</small>
                     </div>
-
+                   
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Description</label>
-                        <textarea id="description" name="description" class="form-control" rows="4" placeholder="Describe the issue"></textarea>
+                        <textarea id="description" name="description" class="form-control" rows="4" placeholder="Describe the issue" required></textarea>
                         <small class="text-muted">Provide as much detail as possible</small>
                     </div>
 
@@ -40,8 +43,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <div class="progress" style="height: 12px; border-radius: 8px; color: var(--primary)">
-                            <div id="progressBar" class="progress-bar bg-primary" role="progressbar" style="width:0%; font-size: 0.8rem;">
+                        <div class="progress" style="height: 30px; border-radius: 8px;">
+                            <div id="progressBar" class="progress-bar" role="progressbar" style="width:0%; background-color: var(--primary-color); font-size: 0.8rem;">
                                 0%
                             </div>
                         </div>
@@ -50,10 +53,8 @@
                     <div class="text-center">
                         <button type="submit" class="btn-cta">Submit Issue</button>
                     </div>
-                    @if (ViewBag.Message != null)
-                    {
-                        <div class="alert alert-success text-center">@ViewBag.Message</div>
-                    }
+
+                    
                 </form>
             </div>
 
@@ -72,6 +73,8 @@
 @section Scripts {
     <script>
         const inputs = ['location', 'category', 'description'];
+        const progressBar = document.getElementById('progressBar');
+
         inputs.forEach(id => {
             document.getElementById(id).addEventListener('input', updateProgress);
         });
@@ -79,9 +82,27 @@
         function updateProgress() {
             let filled = inputs.filter(id => document.getElementById(id).value.trim() !== "").length;
             let percent = (filled / inputs.length) * 100;
-            let bar = document.getElementById('progressBar');
-            bar.style.width = percent + '%';
-            bar.innerText = Math.round(percent) + '%';
+            progressBar.style.width = percent + '%';
+            progressBar.innerText = Math.round(percent) + '%';
         }
+
+                window.addEventListener('load', () => {
+            const successMessage = document.getElementById('successMessage');
+            @if (ViewBag.Message != null)
+            {
+                    <text>
+                    successMessage.innerText = "@ViewBag.Message";
+                    successMessage.style.display = 'block';
+
+                    // Fade out after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.transition = "opacity 0.5s";
+                        successMessage.style.opacity = 0;
+                        setTimeout(() => successMessage.style.display = 'none', 500);
+                    }, 3000);
+                    </text>
+            }
+        });
+
     </script>
 }
