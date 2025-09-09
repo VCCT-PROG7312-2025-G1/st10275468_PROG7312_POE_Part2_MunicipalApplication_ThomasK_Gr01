@@ -18,7 +18,7 @@ namespace Municipal_Services_Portal.Controllers
         {
             return View();
         }
-
+      
         public IActionResult Privacy()
         {
             return View();
