@@ -1,30 +1,26 @@
 ﻿@{
-    ViewData["Title"] = "Report an Issue";
+    ViewData["Title"] = "Report Issues";
+  
 }
+<div class="report-section">
+    <div class="container">
+        <div class="reportHero-text">
+            <h1>Report an Issue</h1>
+            <p>Fill out the form below to submit a report</p>
+        </div>
 
-<div class="container mt-5">
-    <div class="text-center mb-4">
-        <h1 class="display-5">Report an Issue</h1>
-    </div>
-
-    @if (ViewBag.Message != null)
-    {
-        <div class="alert alert-success text-center">@ViewBag.Message</div>
-    }
-
-    <div class="d-flex justify-content-center">
-        <div class="card shadow-lg w-100" style="max-width: 600px;">
-            <div class="card-body">
+        <div class="cards-wrapper">
+            <div class="report-card">
+                <h5>Submit Your Issue</h5>
                 <form asp-action="ReportIssues" method="post" enctype="multipart/form-data">
-
                     <div class="mb-3">
-                        <label class="form-label">Location</label>
+                        <label class="form-label fw-semibold">Location</label>
                         <input type="text" id="location" name="location" class="form-control" placeholder="Enter Location" />
-                        <small class="text-muted">Example Address</small>
+                        <small class="text-muted">Example: 123 Main Street</small>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Category</label>
+                        <label class="form-label fw-semibold">Category</label>
                         <select id="category" name="category" class="form-select">
                             <option value="">Select a category</option>
                             <option value="TestCategory">TestCategory</option>
@@ -33,41 +29,44 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Description</label>
+                        <label class="form-label fw-semibold">Description</label>
                         <textarea id="description" name="description" class="form-control" rows="4" placeholder="Describe the issue"></textarea>
                         <small class="text-muted">Provide as much detail as possible</small>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Attach Photo/Document</label>
+                        <label class="form-label fw-semibold">Attach Photo/Document</label>
                         <input type="file" name="media" class="form-control" />
                     </div>
 
                     <div class="mb-4">
-                        <div class="progress" style="height: 15px; border-radius: 10px;">
-                            <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width:0%; font-size: 0.8rem;">
+                        <div class="progress" style="height: 12px; border-radius: 8px; color: var(--primary)">
+                            <div id="progressBar" class="progress-bar bg-primary" role="progressbar" style="width:0%; font-size: 0.8rem;">
                                 0%
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg px-5">Submit Issue</button>
+                        <button type="submit" class="btn-cta">Submit Issue</button>
                     </div>
-
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success text-center">@ViewBag.Message</div>
+                    }
                 </form>
+            </div>
+
+            <div class="tips-card">
+                <h5>Tips for Submitting Issues</h5>
+                <ul class="list-unstyled mb-0">
+                    <li>> Test tip1</li>
+                    <li>> Test tip2</li>
+                    <li>> Test tip3</li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
-<div class="mt-5 text-center">
-    <h5>Tips for Submitting Issues</h5>
-    <ul class="list-unstyled text-muted">
-        <li>Enter location.</li>
-        <li>Choose the category.</li>
-        <li>Describe the issue.</li>
-        <li>Attach photos.</li>
-    </ul>
 </div>
 
 @section Scripts {
