@@ -6,7 +6,21 @@ namespace Municipal_Services_Portal.Controllers
     public class ReportIssueController : Controller
     {
 
-        private static IssueLinkedList issues = new IssueLinkedList();
+        public static IssueLinkedList issues { get; } = new IssueLinkedList();
+
+        static ReportIssueController()
+        {
+            //Sample data that will be on the website when opened
+            var issue1 = new Issue("2 Howe Road, Observatory", "Road", "Road is flooded", "");
+            var issue2 = new Issue("41 Main Road, Bergvliet", "Electrical", "Street light down", "");
+
+            issue1.Status = "Resolved";
+            issue2.Status = "In progress";
+
+            issues.AddIssue(issue1);
+            issues.AddIssue(issue2);
+               
+        }
 
         [HttpGet]
         public IActionResult ReportIssues()

@@ -6,8 +6,8 @@
 <div class="hero-banner">
     <div class="overlay"></div>
     <div class="hero-text">
-        <h1>Welcome to the Test Municipal Portal</h1>
-        <p>Report issues, view issues, and this is a test</p>
+        <h1>Welcome to the Cape Town Municipal Portal</h1>
+        <p>Report issues, View issues and Connect with your community</p>
         <a href="ReportIssue/ReportIssues" class="btn-cta">Report an Issue</a>
     </div>
 </div>
@@ -18,17 +18,18 @@
         <div class="section">
             <i class="fas fa-list"></i>
             <h5>Total Issues</h5>
-            <p>Test</p>
+            <p>@ViewData["TotalIssues"]</p>
         </div>
         <div class="section">
             <i class="fas fa-exclamation-triangle"></i>
             <h5>Most Recent</h5>
-            <p>Test</p>
+            <p>Location: @ViewData["MostRecentIssueLocation"]</p>
+            <p>Issue: @ViewData["MostRecentIssueDescription"]</p>
         </div>
         <div class="section">
             <i class="fas fa-clock"></i>
             <h5>Pending Issues</h5>
-            <p>Test</p>
+            <p>@ViewData["PendingIssues"]</p>
         </div>
     </div>
 </div>
@@ -37,14 +38,15 @@
 <div class="split-info-banner">
     <div class="info-left">
         <h4>Why Use This Portal?</h4>
-        <p>This is a test to see why yuo must use this portal!!!</p>
+        <p>This portal allows you to contribute to your community by reporting issues and speaking up, helping us resolve them quickly and effectively.</p>
     </div>
     <div class="info-right">
         <h4>Helpful Tips</h4>
         <ul>
-            <li><i class="fas fa-check-circle"></i> > Test tip 1</li>
-            <li><i class="fas fa-check-circle"></i> > Test tip 1</li>
-            <li><i class="fas fa-check-circle"></i> > Test tip 1</li>
+            <li><i class="fas fa-check-circle"></i> > Make a difference in your community.</li>
+            <li><i class="fas fa-check-circle"></i> > Stay updated with news & updates</li>
+            <li><i class="fas fa-check-circle"></i> > No issue is to small.</li>
+            <li><i class="fas fa-check-circle"></i> > Contact us anytime.</li>
         </ul>
     </div>
 </div>
@@ -56,36 +58,38 @@
         <div class="features-card">
             <i class="fas fa-bullhorn"></i>
             <h5>Report an Issue</h5>
-            <p>Report issues in your area to help us improve municipal services.</p>
-            <a href="ReportIssue/ReportIssues" class="btn-cta">Report an Issue</a>
+            <p>Report issues in your area to help our community.</p>
+            <a href="ReportIssue/ReportIssues" class="btn-cta">Report Issue</a>
         </div>
         <div class="features-card">
             <i class="fas fa-eye"></i>
             <h5>View Reported Issues</h5>
-            <p>Check the status of submitted issues and see community updates.</p>
-            <a href="ReportIssue/ViewIssues" class="btn-cta">View Issues</a>
+            <p>View all issues reported by the community</p>
+            <a href="ReportIssue/ViewIssues" class="btn-cta">View All Issues</a>
         </div>
         <div class="features-card">
             <i class="fas fa-newspaper"></i>
-            <h5>More featrures test</h5>
-            <p>More features to follow More features to follow</p>
+            <h5>Local Events & Announcements</h5>
+            <p>Stay informed with community events and announcements.</p>
             <a href="#" class="btn-cta disabled">Unavailable</a>
         </div>
         <div class="features-card">
             <i class="fas fa-newspaper"></i>
-            <h5>More featrures test2</h5>
-            <p>More features to follow More features to follow</p>
-            <a href="" class="btn-cta disabled">Share</a>
+            <h5>Service Request Status</h5>
+            <p>View service request updates in real time.</p>
+            <a href="" class="btn-cta disabled">Unavailable</a>
         </div>
         
     </div>
 </div>
 
+<!--About this portal section-->
 <div class="about-section">
     <h4>About This Portal</h4>
     <p>
-        This municipal portal is a project created to demonstrate how communities can
-        report issues, track progress, and stay informed. It is designed to improve
-        transparency and encourage collaboration between citizens and services.
+    This municipal portal helps Cape Town residents report and view issues, track their progress, and stay informed
+    with community news and announcements. It encourages residents to make a difference and aims to build transparency between
+     the community and municipal services.
+    
     </p>
 </div>

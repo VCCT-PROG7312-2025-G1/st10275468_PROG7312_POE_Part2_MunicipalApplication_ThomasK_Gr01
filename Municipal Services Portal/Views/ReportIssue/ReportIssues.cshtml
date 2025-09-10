@@ -19,22 +19,31 @@
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Location</label>
                         <input type="text" id="location" name="location" class="form-control" placeholder="Enter Location" required />
-                        <small class="text-muted">Example: 123 Main Street</small>
+                        <small class="text-muted"> Example: 123 Main Street</small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Category</label>
                         <select id="category" name="category" class="form-select" required>
                             <option value="">Select a category</option>
-                            <option value="TestCategory">TestCategory</option>
+                            <option value="Roads">Roads</option>
+                            <option value="Sanitation">Sanitation</option>
+                            <option value="Water">Water</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Waste">Waste</option>
+                            <option value="Parks">Parks</option>
+                            <option value="Buildings">Buildings</option>
+                            <option value="Health">Health</option>
+                            <option value="Safety">Safety</option>
+                            <option value="Other">Other</option>
                         </select>
-                        <small class="text-muted">Choose the type of issue</small>
+                        <small class="text-muted"> Select the type of issue</small>
                     </div>
                    
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Description</label>
                         <textarea id="description" name="description" class="form-control" rows="4" placeholder="Describe the issue" required></textarea>
-                        <small class="text-muted">Provide as much detail as possible</small>
+                        <small class="text-muted"> Describe the issue in detail</small>
                     </div>
 
                     <div class="mb-3">
@@ -61,9 +70,12 @@
             <div class="tips-card">
                 <h5>Tips for Submitting Issues</h5>
                 <ul class="list-unstyled mb-0">
-                    <li>> Test tip1</li>
-                    <li>> Test tip2</li>
-                    <li>> Test tip3</li>
+                    <li>> Be specific about the location</li>
+                    <li>> Describe the issue in detail</li>
+                    <li>> Select the correct category</li>
+                    <li>> Attach supporting photos</li>
+                    <li>> Use clear language</li>
+                    <li>> Check the progress bar</li>
                 </ul>
             </div>
         </div>
@@ -83,7 +95,7 @@
             let filled = inputs.filter(id => document.getElementById(id).value.trim() !== "").length;
             let percent = (filled / inputs.length) * 100;
             progressBar.style.width = percent + '%';
-            progressBar.innerText = Math.round(percent) + '%';
+            progressBar.innerText = Math.round(percent) + '% complete';
         }
 
                 window.addEventListener('load', () => {

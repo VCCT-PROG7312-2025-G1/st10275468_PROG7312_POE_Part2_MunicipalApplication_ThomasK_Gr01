@@ -1,4 +1,3 @@
-
 html, body {
     margin: 0;
     padding: 0;
@@ -15,13 +14,13 @@ html, body {
 .navbar {
     background-color: var(--primary-color);
     color: white;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .hero-banner {
     width: 100vw;
     height: 500px;
-    background: url('/Background/img1.jpg') center/cover no-repeat fixed;
+    background: url('/Background/img4.jpg') center/cover no-repeat fixed;
     position: relative;
     margin-top: -16px;
 }
@@ -32,7 +31,6 @@ html, body {
         left: 0;
         width: 100%;
         height: 100%;
-       
         background-color: rgba(0,0,0,0.2);
     }
 
@@ -41,13 +39,14 @@ html, body {
     z-index: 1;
     text-align: center;
     color: #fff;
-    top: 130px
-    
+    top: 130px;
 }
+
     .hero-text h1 {
-        font-size: 4rem;
+        font-size: 3.5rem;
         text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
     }
+
     .hero-text p {
         font-size: 1.3rem;
         margin-bottom: 20px;
@@ -73,9 +72,6 @@ html, body {
         color: #fff;
         text-decoration: none;
     }
-    .btn-cta:hover {
-        background-color: blue;
-    }
 
 .issues-container {
     position: relative;
@@ -96,7 +92,7 @@ html, body {
     .card-horizontal .section {
         flex: 1;
         text-align: center;
-        padding: 30px ;
+        padding: 20px;
         border-right: 1px solid var(--primary-color);
     }
 
@@ -110,14 +106,14 @@ html, body {
         }
 
         .card-horizontal .section h5 {
-            
             font-weight: bold;
             color: #222;
+            font-size: 1.8rem;
         }
 
         .card-horizontal .section p {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #555;
         }
 
@@ -125,12 +121,12 @@ html, body {
     display: flex;
     flex-wrap: wrap;
     background-color: #fff;
-   
     width: 100%;
-    color:black;
-    padding-bottom:60px;
+    color: black;
+    padding-bottom: 60px;
     justify-content: center;
     align-items: center;
+
 }
 
     .split-info-banner .info-left,
@@ -141,12 +137,13 @@ html, body {
         justify-content: center;
         padding: 30px 150px;
         text-align: center;
-        border-right:2px solid var(--primary-color);
+        border-right: 2px solid var(--primary-color);
     }
 
     .split-info-banner h4 {
         margin-bottom: 15px;
         color: var(--primary-color);
+        text-align: left;
     }
 
     .split-info-banner ul {
@@ -157,11 +154,13 @@ html, body {
     .split-info-banner li {
         margin-bottom: 10px;
         font-size: 1.1rem;
+        text-align: left;
     }
 
         .split-info-banner li i {
             color: var(--primary-color);
             margin-right: 8px;
+           
         }
 
     .split-info-banner .divider {
@@ -169,10 +168,12 @@ html, body {
         background-color: #00008B;
         margin: 0 20px;
     }
+
     .split-info-banner .info-left p,
     .split-info-banner .info-right li {
         font-size: 1.1rem;
         line-height: 1.6;
+        text-align: left;
     }
 
 .features-section {
@@ -199,17 +200,15 @@ html, body {
         color: white;
         font-size: 3rem;
         margin-bottom: 40px;
-       
         z-index: 1;
         text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
         position: relative;
-
     }
 
 .features-cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 30px;
     justify-content: center;
     position: relative;
     z-index: 1;
@@ -218,7 +217,7 @@ html, body {
 .features-card {
     background-color: white;
     color: black;
-    width: 250px;
+    width: 300px;
     padding: 30px 20px;
     border-radius: 15px;
     text-align: center;
@@ -261,14 +260,6 @@ html, body {
             background-color: blue;
         }
 
-@media (max-width:768px) {
-    .features-cards {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-
 .footer {
     background-color: var(--primary-color);
     color: #fff;
@@ -277,24 +268,6 @@ html, body {
     margin-top: 40px;
 }
 
-@media (max-width:768px) {
-    .card-horizontal {
-        flex-direction: column;
-    }
-
-        .card-horizontal .section {
-            border-right: none;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-            .card-horizontal .section:last-child {
-                border-bottom: none;
-            }
-
-    .features-cards {
-        flex-direction: column;
-    }
-}
 .btn-cta.disabled {
     background-color: #aaa;
     cursor: not-allowed;
@@ -308,23 +281,18 @@ html, body {
     padding: 60px 20px;
 }
 
-.about-section h4 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
+    .about-section h4 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
 
-.about-section p {
-    max-width: 900px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-.footer {
-    background-color: var(--primary-color);
-    color: #fff;
-    
-}
+    .about-section p {
+        max-width: 900px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
 
 .footer-container {
     display: flex;
@@ -371,34 +339,32 @@ html, body {
     padding-top: 10px;
     font-size: 0.9rem;
 }
+
 .reportHero-text {
     position: relative;
     z-index: 1;
     text-align: center;
     color: #fff;
-    top:35px;
-    padding-bottom:60px;
-    margin-bottom:0;
-
+    padding-top: 70px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
 }
 
     .reportHero-text h1 {
         font-size: 4rem;
         text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
-        
     }
 
     .reportHero-text p {
         font-size: 1.3rem;
         text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
     }
+
 .report-section {
-    background: url('/Background/img1.jpg') center/cover no-repeat;
+    background: url('/Background/img3.jpg') center/cover no-repeat;
     position: relative;
     color: #fff;
     margin-top: -16px;
-   
-
 }
 
     .report-section::before {
@@ -415,12 +381,9 @@ html, body {
     .report-section .container {
         position: relative;
         z-index: 1;
-        padding-bottom:40px;
-        margin-bottom:-40px;
-
-        
+        padding-bottom: 40px;
+        margin-bottom: -40px;
     }
-
 
     .report-section .hero-text h1 {
         font-size: 3.5rem;
@@ -439,7 +402,7 @@ html, body {
     justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .report-card, .tips-card {
@@ -449,7 +412,7 @@ html, body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.8);
     transition: transform 0.3s, box-shadow 0.4s;
     padding: 20px 25px;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
     .report-card:hover, .tips-card:hover {
@@ -459,9 +422,8 @@ html, body {
 
 .report-card {
     flex: 2;
-
     min-width: 320px;
-    max-width: 480px; 
+    max-width: 480px;
 }
 
 .tips-card {
@@ -480,13 +442,154 @@ html, body {
         text-align: center;
     }
 
-@media (max-width: 768px) {
-    .cards-wrapper {
-        flex-direction: column;
-        align-items: center;
+.issues-page {
+    background-color: #B0C4DE;
+    min-height: 100vh;
+    padding: 60px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.issues-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+    .issues-header h1 {
+        color: #00008B;
+        font-size: 3rem;
+        margin-bottom: 10px;
     }
 
-    .report-card, .tips-card {
-        max-width: 100%;
+    .issues-header p {
+        color: #333;
+        font-size: 1.2rem;
     }
+
+.issues-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    z-index: 1;
 }
+
+    .issues-filter input, .issues-filter select {
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+        font-size: 1rem;
+    }
+
+        .issues-filter input:focus, .issues-filter select:focus {
+            outline: none;
+            border-color: #00008B;
+        }
+
+        .issues-filter select:hover, input:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.7);
+        }
+
+.issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.issue-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .issue-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.7);
+    }
+
+    .issue-card h5 {
+        color: #00008B;
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+    }
+
+    .issue-card .location {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .issue-card .description {
+        flex-grow: 1;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .issue-card .date {
+        font-size: 0.85rem;
+        color: #777;
+        margin-bottom: 10px;
+    }
+
+    .issue-card .status .badge {
+        padding: 5px 10px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .issue-card .status .pending {
+        background-color: #f0ad4e;
+    }
+
+    .issue-card .status .resolved {
+        background-color: #5cb85c;
+    }
+
+    .issue-card .btn-view {
+        align-self: flex-start;
+        padding: 8px 15px;
+        background-color: #00008B;
+    }
+
+.display-section {
+    background: url('/Background/img1.jpg') center/cover no-repeat;
+    position: relative;
+    color: #fff;
+    margin-top: -16px;
+    margin-bottom: -40px;
+    min-height: 700px;
+}
+
+    .display-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.2);
+        z-index: 0;
+    }
+
+    .display-section .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .display-section .hero-text h1 {
+        font-size: 3.5rem;
+        text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+        margin-bottom: 10px;
+    }
+
+    .display-section .hero-text p {
+        font-size: 1.3rem;
+        margin-bottom: 0;
+    }
