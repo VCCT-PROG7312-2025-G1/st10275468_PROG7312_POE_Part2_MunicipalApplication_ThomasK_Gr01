@@ -11,7 +11,7 @@
         <h1>Reported Issues</h1>
         <p>View all issues efficiently</p>
     </div>
-
+        <!--Filter enabling user to filter through issues by category-->
     <div class="issues-filter">
         <input type="text" id="searchInput" placeholder="Search by description..." onkeyup="filterIssues()" />
         <select id="categorySelect" onchange="filterIssues()">
@@ -22,8 +22,7 @@
             }
         </select>
     </div>
-
-  
+        <!--Displaying issues to the user in card format-->
     <div class="issues-grid" id="issuesGrid">
         @if (Model == null || !Model.Any())
         {

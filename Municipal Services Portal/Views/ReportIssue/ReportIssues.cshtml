@@ -15,6 +15,7 @@
                 <div id="successMessage" class="alert alert-success text-center"
                      style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:80%; z-index:10; opacity:1;">
                 </div>
+                <!--Form where users can submit and report issues-->
                 <form id="reportForm" asp-action="ReportIssues" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Location</label>
@@ -66,7 +67,7 @@
                     
                 </form>
             </div>
-
+            <!--General tips for submitting issues-->
             <div class="tips-card">
                 <h5>Tips for Submitting Issues</h5>
                 <ul class="list-unstyled mb-0">
@@ -81,7 +82,7 @@
         </div>
     </div>
 </div>
-
+<!--Creating a functional progress bar and success message-->
 @section Scripts {
     <script>
         const inputs = ['location', 'category', 'description'];
@@ -97,8 +98,7 @@
             progressBar.style.width = percent + '%';
             progressBar.innerText = Math.round(percent) + '% complete';
         }
-
-                window.addEventListener('load', () => {
+            window.addEventListener('load', () => {
             const successMessage = document.getElementById('successMessage');
             @if (ViewBag.Message != null)
             {
@@ -106,7 +106,6 @@
                     successMessage.innerText = "@ViewBag.Message";
                     successMessage.style.display = 'block';
 
-                    // Fade out after 3 seconds
                     setTimeout(() => {
                         successMessage.style.transition = "opacity 0.5s";
                         successMessage.style.opacity = 0;

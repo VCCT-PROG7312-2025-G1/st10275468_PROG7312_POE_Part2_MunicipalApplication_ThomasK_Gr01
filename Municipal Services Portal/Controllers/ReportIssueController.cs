@@ -10,8 +10,8 @@ namespace Municipal_Services_Portal.Controllers
 
         static ReportIssueController()
         {
-            //Sample data that will be on the website when opened
-            var issue1 = new Issue("2 Howe Road, Observatory", "Road", "Road is flooded", "");
+            //Sample data that will be on the website when opened for demo purposes
+            var issue1 = new Issue("2 Howe Road, Observatory", "Roads", "Road is flooded", "");
             var issue2 = new Issue("41 Main Road, Bergvliet", "Electrical", "Street light down", "");
 
             issue1.Status = "Resolved";
@@ -36,6 +36,7 @@ namespace Municipal_Services_Portal.Controllers
             {
                 string folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/IssueImages");
 
+                //Creating image/document folder if it doesn't exist
                 if (!Directory.Exists(folder)) { 
                     Directory.CreateDirectory(folder);
                 }
@@ -51,6 +52,7 @@ namespace Municipal_Services_Portal.Controllers
 
             }
 
+            //Creating a mew issue and adding it to the linkedlist
             Issue newIssue = new Issue(location, category, description, mediaPath);
             issues.AddIssue(newIssue);
             ViewBag.Message = "Issue submitted";
