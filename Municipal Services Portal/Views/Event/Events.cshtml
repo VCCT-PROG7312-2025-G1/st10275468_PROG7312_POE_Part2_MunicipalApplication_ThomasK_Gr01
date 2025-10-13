@@ -4,6 +4,9 @@
     ViewData["Title"] = "Local Events";
     var categories = ViewBag.Categories as List<string>;
     var recentlyViewed = ViewBag.RecentlyViewed as List<Municipal_Services_Portal.Models.Event>;
+    var currentSearch = ViewBag.CurrentSearch as string ?? "";
+    var currentCategory = ViewBag.CurrentCategory as string ?? "";
+    var currentSort = ViewBag.CurrentSort as string ?? "";
 }
 
 <div class="container mt-4">
@@ -13,18 +16,38 @@
     <div class="row">
         <div class="col-lg-9">
             <div class="mb-4 d-flex gap-2">
-                <input type="text" id="searchInput" placeholder="Search by name..." class="form-control" onkeyup="filterEvents()" />
-                <select id="categorySelect" class="form-control" onchange="filterEvents()">
+                <input type="text" id="searchInput" placeholder="Search by name..." class="form-control" value="@currentSearch" />
+                <select id="categorySelect" class="form-control">
                     <option value="">All Categories</option>
-                    @foreach (var category in categories)
+                    @foreach (var cat in categories)
                     {
-                        <option value="@category">@category</option>
+                        if (cat == currentCategory)
+                        {
+                            <option value="@cat" selected>@cat</option>
+                        }
+                        else
+                        {
+                            <option value="@cat">@cat</option>
+                        }
                     }
+
+
                 </select>
+                <select id="sortSelect" class="form-control">
+                    <option value="">Sort By</option>
+                    <option value="dateAsc" selected="@(currentSort == "dateAsc")">Date ↑</option>
+                    <option value="dateDesc" selected="@(currentSort == "dateDesc")">Date ↓</option>
+                    <option value="nameAsc" selected="@(currentSort == "nameAsc")">Name A–Z</option>
+                    <option value="nameDesc" selected="@(currentSort == "nameDesc")">Name Z–A</option>
+                    <option value="categoryAsc" selected="@(currentSort == "categoryAsc")">Category A–Z</option>
+                    <option value="categoryDesc" selected="@(currentSort == "categoryDesc")">Category Z–A</option>
+                </select>
+
+
+                <button class="btn-cta mt-auto" onclick="applySortFilter()">Apply</button>
             </div>
 
             <div id="eventsGrid" class="row custom-events-grid">
-
                 @foreach (var evt in Model)
                 {
                     <div class="col-md-4">
@@ -34,19 +57,17 @@
                                 <p class="card-subtitle mb-1"><strong>Category:</strong> @evt.Category</p>
                                 <p class="card-subtitle mb-1"><strong>Date:</strong> @evt.Date.ToString("dd MMM yyyy")</p>
                                 <p class="card-subtitle mb-1"><strong>Location:</strong> @evt.Location</p>
-
                                 <button class="btn-cta mt-auto"
                                         onclick="viewEventAndShowModal('@evt.eventName', '@evt.Category', '@evt.Date.ToString("dd MMM yyyy")', '@evt.Location', `@evt.Description`, '@evt.imgPath')">
                                     View Details
                                 </button>
-
-
                             </div>
                         </div>
                     </div>
                 }
             </div>
         </div>
+
         <div class="col-lg-3">
             <h4 class="recently-viewed-heading">Recently Viewed Events</h4>
             <ul class="list-group" id="recentlyViewedList">
@@ -55,7 +76,6 @@
                     @foreach (var rv in recentlyViewed)
                     {
                         <li class="list-group-item" style="border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.15);">@rv.eventName - @rv.Date.ToString("dd MMM")</li>
-
                     }
                 }
                 else
@@ -64,7 +84,6 @@
                 }
             </ul>
         </div>
-
     </div>
 </div>
 
@@ -87,62 +106,50 @@
     </div>
 </div>
 
-
 @section Scripts {
-    <script>
-                function filterEvents() {
-            var input = document.getElementById('searchInput').value.toLowerCase();
-            var category = document.getElementById('categorySelect').value;
-            document.querySelectorAll('.event-card').forEach(card => {
-                var matchesCategory = !category || card.dataset.category === category;
-                var matchesSearch = !input || card.dataset.name.includes(input);
-                card.parentElement.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
-            });
-        }
+<script>
+    function applySortFilter() {
+        var search = document.getElementById('searchInput').value;
+        var category = document.getElementById('categorySelect').value;
+        var sortOrder = document.getElementById('sortSelect').value;
 
-                function viewEventAndShowModal(eventName, category, date, location, description, imgPath) {
-           
-            fetch('@Url.Action("ViewEvent")', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'eventName=' + encodeURIComponent(eventName)
-            })
-            .then(response => {
-                const ul = document.getElementById('recentlyViewedList');
+        window.location.href = `@Url.Action("Events")?search=${encodeURIComponent(search)}&categoryFilter=${encodeURIComponent(category)}&sortOrder=${encodeURIComponent(sortOrder)}`;
+    }
 
-                Array.from(ul.children).forEach(li => {
-                    if (li.innerText.startsWith(eventName)) li.remove();
-                });
+    function viewEventAndShowModal(eventName, category, date, location, description, imgPath) {
+        fetch('@Url.Action("ViewEvent")', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'eventName=' + encodeURIComponent(eventName)
+        }).then(response => {
+            const ul = document.getElementById('recentlyViewedList');
 
-                const li = document.createElement('li');
-                li.className = 'list-group-item';
-                li.innerText = `${eventName} - ${date}`;
-                ul.prepend(li);
-
-                while (ul.children.length > 5) {
-                    ul.removeChild(ul.lastChild);
-                }
+            Array.from(ul.children).forEach(li => {
+                if (li.innerText.startsWith(eventName)) li.remove();
             });
 
-            document.getElementById('eventModalLabel').innerText = eventName;
-            document.getElementById('modalCategory').innerText = category;
-            document.getElementById('modalDate').innerText = date;
-            document.getElementById('modalLocation').innerText = location;
-            document.getElementById('modalDescription').innerText = description;
+            const li = document.createElement('li');
+            li.className = 'list-group-item';
+            li.innerText = `${eventName} - ${date}`;
+            ul.prepend(li);
 
-            var img = document.getElementById('modalImage');
-            if (imgPath) {
-                img.src = imgPath;
-                img.style.display = 'block';
-            } else {
-                img.style.display = 'none';
+            while (ul.children.length > 5) {
+                ul.removeChild(ul.lastChild);
             }
+        });
 
-            var modal = new bootstrap.Modal(document.getElementById('eventModal'));
-            modal.show();
-        }
+        document.getElementById('eventModalLabel').innerText = eventName;
+        document.getElementById('modalCategory').innerText = category;
+        document.getElementById('modalDate').innerText = date;
+        document.getElementById('modalLocation').innerText = location;
+        document.getElementById('modalDescription').innerText = description;
 
+        var img = document.getElementById('modalImage');
+        if (imgPath) { img.src = imgPath; img.style.display = 'block'; }
+        else { img.style.display = 'none'; }
 
-
-    </script>
+        var modal = new bootstrap.Modal(document.getElementById('eventModal'));
+        modal.show();
+    }
+</script>
 }
