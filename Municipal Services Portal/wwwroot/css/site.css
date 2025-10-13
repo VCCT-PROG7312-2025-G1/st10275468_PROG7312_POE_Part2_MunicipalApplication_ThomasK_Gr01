@@ -720,3 +720,8 @@ html, body {
         background-color: blue;
         color: #fff;
     }
+body.events {
+    background: url('/Background/img6.jpg') center/cover no-repeat fixed;
+    min-height: 100vh;
+   
+}
