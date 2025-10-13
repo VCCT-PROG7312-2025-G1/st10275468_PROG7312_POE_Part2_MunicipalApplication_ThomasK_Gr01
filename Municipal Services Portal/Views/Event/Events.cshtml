@@ -1,5 +1,148 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Municipal_Services_Portal.Models.Event>
+
 @{
+    ViewData["Title"] = "Local Events";
+    var categories = ViewBag.Categories as List<string>;
+    var recentlyViewed = ViewBag.RecentlyViewed as List<Municipal_Services_Portal.Models.Event>;
+}
+
+<div class="container mt-4">
+    <div class="events-header">
+        <h1>Upcoming Events</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="mb-4 d-flex gap-2">
+                <input type="text" id="searchInput" placeholder="Search by name..." class="form-control" onkeyup="filterEvents()" />
+                <select id="categorySelect" class="form-control" onchange="filterEvents()">
+                    <option value="">All Categories</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category">@category</option>
+                    }
+                </select>
+            </div>
+
+            <div id="eventsGrid" class="row custom-events-grid">
+
+                @foreach (var evt in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card h-100 event-card" data-name="@evt.eventName.ToLower()" data-category="@evt.Category">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@evt.eventName</h5>
+                                <p class="card-subtitle mb-1"><strong>Category:</strong> @evt.Category</p>
+                                <p class="card-subtitle mb-1"><strong>Date:</strong> @evt.Date.ToString("dd MMM yyyy")</p>
+                                <p class="card-subtitle mb-1"><strong>Location:</strong> @evt.Location</p>
+
+                                <button class="btn-cta mt-auto"
+                                        onclick="viewEventAndShowModal('@evt.eventName', '@evt.Category', '@evt.Date.ToString("dd MMM yyyy")', '@evt.Location', `@evt.Description`, '@evt.imgPath')">
+                                    View Details
+                                </button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <h4 class="recently-viewed-heading">Recently Viewed Events</h4>
+            <ul class="list-group" id="recentlyViewedList">
+                @if (recentlyViewed != null && recentlyViewed.Count > 0)
+                {
+                    @foreach (var rv in recentlyViewed)
+                    {
+                        <li class="list-group-item" style="border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.15);">@rv.eventName - @rv.Date.ToString("dd MMM")</li>
+
+                    }
+                }
+                else
+                {
+                    <p>No events viewed yet.</p>
+                }
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3" style="border-radius: 1rem; box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15); background-color: #fff;">
+            <div class="modal-header border-0 pb-0 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title" id="eventModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-start">
+                <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+                <p><strong>Date:</strong> <span id="modalDate"></span></p>
+                <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+                <hr class="my-2" />
+                <img id="modalImage" src="" alt="Event Image" class="img-fluid mb-3 rounded" style="display:none;" />
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+                function filterEvents() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var category = document.getElementById('categorySelect').value;
+            document.querySelectorAll('.event-card').forEach(card => {
+                var matchesCategory = !category || card.dataset.category === category;
+                var matchesSearch = !input || card.dataset.name.includes(input);
+                card.parentElement.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
+            });
+        }
+
+                function viewEventAndShowModal(eventName, category, date, location, description, imgPath) {
+           
+            fetch('@Url.Action("ViewEvent")', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'eventName=' + encodeURIComponent(eventName)
+            })
+            .then(response => {
+                const ul = document.getElementById('recentlyViewedList');
+
+                Array.from(ul.children).forEach(li => {
+                    if (li.innerText.startsWith(eventName)) li.remove();
+                });
+
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerText = `${eventName} - ${date}`;
+                ul.prepend(li);
+
+                while (ul.children.length > 5) {
+                    ul.removeChild(ul.lastChild);
+                }
+            });
+
+            document.getElementById('eventModalLabel').innerText = eventName;
+            document.getElementById('modalCategory').innerText = category;
+            document.getElementById('modalDate').innerText = date;
+            document.getElementById('modalLocation').innerText = location;
+            document.getElementById('modalDescription').innerText = description;
+
+            var img = document.getElementById('modalImage');
+            if (imgPath) {
+                img.src = imgPath;
+                img.style.display = 'block';
+            } else {
+                img.style.display = 'none';
+            }
+
+            var modal = new bootstrap.Modal(document.getElementById('eventModal'));
+            modal.show();
+        }
+
+
+
+    </script>
 }
