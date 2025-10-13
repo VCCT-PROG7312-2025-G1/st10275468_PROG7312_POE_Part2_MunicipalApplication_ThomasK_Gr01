@@ -8,5 +8,13 @@
         public string Location { get; set; }
         public DateTime Date { get; set; }
        
+        public Event(string eventname, string category, string description, string location, DateTime date)
+        {
+            eventName = eventname;
+            Category = category;
+            Description = description;
+            Location = location;
+            Date = date;
+        }
     }
 }
