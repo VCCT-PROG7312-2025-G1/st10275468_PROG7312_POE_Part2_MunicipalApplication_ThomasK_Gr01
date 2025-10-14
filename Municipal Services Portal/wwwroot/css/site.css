@@ -103,6 +103,7 @@ html, body {
         .card-horizontal .section i {
             font-size: 2.5rem;
             color: var(--primary-color);
+            font-weight: bold;
         }
 
         .card-horizontal .section h5 {
@@ -126,7 +127,6 @@ html, body {
     padding-bottom: 60px;
     justify-content: center;
     align-items: center;
-
 }
 
     .split-info-banner .info-left,
@@ -160,7 +160,6 @@ html, body {
         .split-info-banner li i {
             color: var(--primary-color);
             margin-right: 8px;
-           
         }
 
     .split-info-banner .divider {
@@ -238,6 +237,7 @@ html, body {
 
     .features-card h5 {
         color: var(--primary-color);
+        font-weight: bold;
         margin-bottom: 10px;
     }
 
@@ -513,9 +513,10 @@ html, body {
     }
 
     .issue-card h5 {
-        color: #00008B;
+        color: var(--primary-color);
+        font-weight: bold;
         margin-bottom: 5px;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .issue-card .location {
@@ -593,14 +594,14 @@ html, body {
         font-size: 1.3rem;
         margin-bottom: 0;
     }
+
 .event-card {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     transition: transform 0.3s, box-shadow 0.4s;
-    min-height:200px;
+    min-height: 200px;
     overflow: hidden;
     cursor: pointer;
-
 }
 
     .event-card:hover {
@@ -613,27 +614,24 @@ html, body {
         height: 180px;
         object-fit: cover;
     }
+
 .custom-events-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 20px;
     row-gap: 50px;
-    
 }
 
     .custom-events-grid > .col-md-4 {
         flex: 0 0 calc(33.333% - 13.33px);
         max-width: calc(33.333% - 13.33px);
-      
     }
 
 #recentlyViewedList {
     height: 300px;
     max-height: 500px;
-   
     padding-right: 5px;
-    
 }
 
     #recentlyViewedList li {
@@ -649,8 +647,8 @@ html, body {
             transform: translateX(3px);
             background-color: #f0f8ff;
         }
+
 #recommendedList {
-   
     padding-right: 5px;
     height: 300px;
     max-height: 500px;
@@ -669,12 +667,13 @@ html, body {
             transform: translateX(3px);
             background-color: #f0f8ff;
         }
+
 .col-lg-9 {
     padding-left: 0;
 }
 
 .container.mt-4 {
-    min-height:1000px
+    min-height: 1000px
 }
 
 .event-card .card-title {
@@ -689,6 +688,7 @@ html, body {
     text-decoration: none;
     transition: 0.3s;
 }
+
     .event-card .btn-cta:hover {
         background-color: blue;
         color: #fff;
@@ -697,11 +697,12 @@ html, body {
 .event-card .card-subtitle {
     color: #000;
 }
+
 .events-header {
     text-align: left;
     margin-top: 40px;
     margin-bottom: 30px;
-    margin-left:250px
+    margin-left: 250px
 }
 
     .events-header h1 {
@@ -718,7 +719,7 @@ html, body {
 }
 
 .mb-4.d-flex.gap-2 {
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 #eventModalLabel {
@@ -743,10 +744,10 @@ html, body {
         background-color: blue;
         color: #fff;
     }
+
 body.events {
-    background: url('/Background/img6.jpg') center/cover no-repeat fixed;
+    background: url('/Background/img7.jpg') center/cover no-repeat fixed;
     min-height: 100vh;
-   
 }
 
 .announcements-section {
@@ -754,8 +755,7 @@ body.events {
     border-top: 3px solid #ddd;
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: -40px;
-    min-height:550px
-  
+    min-height: 550px
 }
 
 .announcements-heading {
