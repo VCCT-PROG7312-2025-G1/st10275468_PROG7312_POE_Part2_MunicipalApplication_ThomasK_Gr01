@@ -15,6 +15,9 @@ namespace Municipal_Services_Portal.Controllers
         // Stack used for recently viewed events
         private static Stack<Event> recentlyViewedEvents = new Stack<Event>();
 
+        //List to store and track the user searches in the events page 
+        private static List<string> userSearches = new List<string>();
+
         static EventController()
         {
             // Sample events
@@ -48,6 +51,7 @@ namespace Municipal_Services_Portal.Controllers
             categories.Add(category);
         }
 
+
         [HttpGet]
         public IActionResult Events(string search = "", string categoryFilter = "", string sortOrder = "")
         {
@@ -59,15 +63,8 @@ namespace Municipal_Services_Portal.Controllers
             if (!string.IsNullOrEmpty(search))
                 eventsList = eventsList.Where(e => e.eventName.ToLower().Contains(search.ToLower())).ToList();
 
-            var announcements = new List<Announcement>
-            {
-                new Announcement { name = "Road works", description = "Road maintenance on 33 Boundry road", Date = DateTime.Now.AddDays(8) },
-                new Announcement { name = "Apartments", description = "New apartment block being built in Observatory", Date = DateTime.Now.AddDays(54) },
-                new Announcement { name = "New Electricity regulations", description = "Electricity regulations are active from Friday", Date = DateTime.Now.AddDays(3) },
 
-            };
 
-            
             eventsList = sortOrder switch
             {
                 "dateAsc" => eventsList.OrderBy(e => e.Date).ToList(),
@@ -79,11 +76,37 @@ namespace Municipal_Services_Portal.Controllers
                 _ => eventsList.OrderBy(e => e.Date).ToList()
             };
 
+            if (!userSearches.Contains(search.ToLower()))
+            {
+                userSearches.Insert(0, search.ToLower());
+                if (userSearches.Count > 5)
+                {
+                    userSearches.RemoveAt(userSearches.Count - 1);
+                }
+
+            }
+            List<Event> suggestedEvents = new List<Event>();
+
+            if (!string.IsNullOrWhiteSpace(search)) { 
+
+                suggestedEvents = eventsSortedDate.SelectMany(e => e.Value).Where(ev => userSearches.Any(term => ev.eventName.ToLower().Contains(term))).Except(eventsList).Take(5).ToList();
+            }
+
+            var announcements = new List<Announcement>
+            {
+                new Announcement { name = "Road works", description = "Road maintenance on 33 Boundry road", Date = DateTime.Now.AddDays(8) },
+                new Announcement { name = "Apartments", description = "New apartment block being built in Observatory", Date = DateTime.Now.AddDays(54) },
+                new Announcement { name = "New Electricity regulations", description = "Electricity regulations are active from Friday", Date = DateTime.Now.AddDays(3) },
+
+            };
+
+
             ViewBag.Categories = categories.OrderBy(c => c).ToList();
             ViewBag.RecentlyViewed = recentlyViewedEvents.ToList();
             ViewBag.CurrentSearch = search;
             ViewBag.CurrentCategory = categoryFilter;
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.SuggestedEvents = suggestedEvents;
             ViewBag.Announcements = announcements;
 
             return View(eventsList);

@@ -629,9 +629,11 @@ html, body {
     }
 
 #recentlyViewedList {
-    max-height: 600px;
-    overflow-y: auto;
+    height: 300px;
+    max-height: 500px;
+   
     padding-right: 5px;
+    
 }
 
     #recentlyViewedList li {
@@ -647,7 +649,26 @@ html, body {
             transform: translateX(3px);
             background-color: #f0f8ff;
         }
+#recommendedList {
+   
+    padding-right: 5px;
+    height: 300px;
+    max-height: 500px;
+}
 
+    #recommendedList li {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        border-radius: 10px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        padding: 10px;
+        transition: transform 0.2s;
+    }
+
+        #recommendedList li:hover {
+            transform: translateX(3px);
+            background-color: #f0f8ff;
+        }
 .col-lg-9 {
     padding-left: 0;
 }
