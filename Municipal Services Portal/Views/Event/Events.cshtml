@@ -102,6 +102,32 @@
         </div>
     </div>
 </div>
+
+    <div class="announcements-section mt-5 py-5">
+        <div class="container">
+            <h2 class="announcements-heading text-center mb-4">Community Announcements</h2>
+
+            <div class="row">
+                   @if (ViewBag.Announcements != null && ((List<Municipal_Services_Portal.Models.Announcement>)ViewBag.Announcements).Count > 0)
+                {
+                    foreach (var announcement in (List<Municipal_Services_Portal.Models.Announcement>)ViewBag.Announcements)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card announcement-card h-100 p-3">
+                                <h5 class="card-title">@announcement.name</h5>
+                                <p class="card-text">@announcement.description</p>
+                                <p class="card-subtitle text-muted mt-2">
+                                    <strong>Date:</strong> @announcement.Date.ToString("dd MMM yyyy")
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+    
+            </div>
+        </div>
+    </div>
+
 </body>
 @section Scripts {
 <script>

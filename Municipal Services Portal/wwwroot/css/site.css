@@ -619,11 +619,13 @@ html, body {
     justify-content: flex-start;
     gap: 20px;
     row-gap: 50px;
+    
 }
 
     .custom-events-grid > .col-md-4 {
         flex: 0 0 calc(33.333% - 13.33px);
         max-width: calc(33.333% - 13.33px);
+      
     }
 
 #recentlyViewedList {
@@ -651,7 +653,7 @@ html, body {
 }
 
 .container.mt-4 {
-    min-height: 800px;
+    min-height:1000px
 }
 
 .event-card .card-title {
@@ -725,3 +727,30 @@ body.events {
     min-height: 100vh;
    
 }
+
+.announcements-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 3px solid #ddd;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: -40px;
+    min-height:550px
+  
+}
+
+.announcements-heading {
+    color: var(--primary-color);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-weight: 700;
+}
+
+.announcement-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .announcement-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }

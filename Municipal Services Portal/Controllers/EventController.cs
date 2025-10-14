@@ -33,6 +33,8 @@ namespace Municipal_Services_Portal.Controllers
             AddEvent("Event 13", "Category 1", new DateTime(2025, 11, 29), "Event 13 description", "Event 13 location", "");
             AddEvent("Event 14", "Category 2", new DateTime(2025, 12, 3), "Event 14 description", "Event 14 location", "");
             AddEvent("Event 15", "Category 3", new DateTime(2025, 12, 7), "Event 15 description", "Event 15 location", "");
+
+
         }
 
         private static void AddEvent(string name, string category, DateTime date, string description, string location, string imgPath)
@@ -57,6 +59,15 @@ namespace Municipal_Services_Portal.Controllers
             if (!string.IsNullOrEmpty(search))
                 eventsList = eventsList.Where(e => e.eventName.ToLower().Contains(search.ToLower())).ToList();
 
+            var announcements = new List<Announcement>
+            {
+                new Announcement { name = "Road works", description = "Road maintenance on 33 Boundry road", Date = DateTime.Now.AddDays(8) },
+                new Announcement { name = "Apartments", description = "New apartment block being built in Observatory", Date = DateTime.Now.AddDays(54) },
+                new Announcement { name = "New Electricity regulations", description = "Electricity regulations are active from Friday", Date = DateTime.Now.AddDays(3) },
+
+            };
+
+            
             eventsList = sortOrder switch
             {
                 "dateAsc" => eventsList.OrderBy(e => e.Date).ToList(),
@@ -73,6 +84,7 @@ namespace Municipal_Services_Portal.Controllers
             ViewBag.CurrentSearch = search;
             ViewBag.CurrentCategory = categoryFilter;
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.Announcements = announcements;
 
             return View(eventsList);
         }
