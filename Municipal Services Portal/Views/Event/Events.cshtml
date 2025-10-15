@@ -21,9 +21,7 @@
     <div class="row">
         <div class="col-lg-9">
             <div class="mb-4 d-flex gap-2">
-                    <input type="date" id="datePicker"  class="form-control" value="@date" />
-
-               
+                <input type="date" id="datePicker"  class="form-control" value="@date" />
                 <select id="categorySearch" class="form-control">
                     <option value="">Search By Category</option>
                     @foreach (var category in categories)
@@ -37,24 +35,19 @@
                             <option value="@category">@category</option>
                         }
                     }
-
-
                 </select>
-                    <input type="text" id="searchInput" placeholder="Search By Event Name" class="form-control" value="@currentSearch" />
-
+                <input type="text" id="searchInput" placeholder="Search By Event Name" class="form-control" value="@currentSearch" />
                 <select id="sortSelect" class="form-control">
                     <option value="">Sort By</option>
-                    <option value="dateAsc" selected="@(currentSort == "dateAsc")">Date ↑</option>
-                    <option value="dateDesc" selected="@(currentSort == "dateDesc")">Date ↓</option>
-                    <option value="nameAsc" selected="@(currentSort == "nameAsc")">Name A–Z</option>
-                    <option value="nameDesc" selected="@(currentSort == "nameDesc")">Name Z–A</option>
-                    <option value="categoryAsc" selected="@(currentSort == "categoryAsc")">Category A–Z</option>
-                    <option value="categoryDesc" selected="@(currentSort == "categoryDesc")">Category Z–A</option>
+                    <option value="dateAscending" selected="@(currentSort == "dateAscending")">Date Ascending</option>
+                    <option value="dateDescending" selected="@(currentSort == "dateDescending")">Date Descending</option>
+                    <option value="nameAscending" selected="@(currentSort == "nameAscending")">Name A to Z</option>
+                    <option value="nameDescending" selected="@(currentSort == "nameDescending")">Name Z to A</option>
+                    <option value="categoryAscending" selected="@(currentSort == "categoryAscending")">Category A to Z</option>
+                    <option value="categoryDescending" selected="@(currentSort == "categoryDescending")">Category Z to A</option>
                 </select>
-
-
                 <button class="btn-cta mt-auto" onclick="applySortFilter()">Apply</button>
-                    <button class="btn btn-secondary mt-2" onclick="clearFilters()">Clear</button>
+                <button class="btn btn-secondary mt-2" onclick="clearFilters()">Clear</button>
             </div>
 
             <div id="eventsGrid" class="row custom-events-grid">
@@ -91,20 +84,18 @@
                     }
                 }
             </ul>
-
             <h4 class="recently-viewed-heading">Recommended Events</h4>
-                <ul class="list-group" id="recommendedList">
-                    @if (suggestedEvents.Count > 0)
+            <ul class="list-group" id="recommendedList">
+                @if (suggestedEvents.Count > 0)
+                {
+                    foreach (var suggestedEvent in suggestedEvents)
                     {
-                        foreach (var suggestedEvent in suggestedEvents)
-                        {
                             <li class="list-group-item" style="border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.15); margin-5;">
                                 @suggestedEvent.eventName - @suggestedEvent.Date.ToString("dd MMM")
                             </li>
-                        }
-                    }
-                </ul>
-
+                     }
+             }
+            </ul>
         </div>
     </div>
 </div>
@@ -128,44 +119,44 @@
     </div>
 </div>
 
-    <div class="announcements-section mt-5 py-5">
-        <div class="container">
-            <h2 class="announcements-heading text-center mb-4">Community Announcements</h2>
-
-            <div class="row">
-                   @if (announcements.Count > 0)
+<div class="announcements-section mt-5 py-5">
+     <div class="container">
+         <h2 class="announcements-heading text-center mb-4">Community Announcements</h2>
+         <div class="row">
+              @if (announcements.Count > 0)
                 {
-                    foreach (var announcement in announcements)
+                  foreach (var announcement in announcements)
                     {
-                        <div class="col-md-4 mb-4">
-                            <div class="card announcement-card h-100 p-3">
-                                <h5 class="card-title">@announcement.name</h5>
-                                <p class="card-text">@announcement.description</p>
-                                <p class="card-subtitle text-muted mt-2">
-                                    <strong>Date:</strong> @announcement.Date.ToString("dd MMM yyyy")
-                                </p>
-                            </div>
+                     <div class="col-md-4 mb-4">
+                        <div class="card announcement-card h-100 p-3">
+                             <h5 class="card-title">@announcement.name</h5>
+                             <p class="card-text">@announcement.description</p>
+                             <p class="card-subtitle text-muted mt-2">
+                             <strong>Date:</strong> @announcement.Date.ToString("dd MMM yyyy")
+                             </p>
                         </div>
+                     </div>
                     }
                 }
-    
-            </div>
-        </div>
-    </div>
+         </div>
+     </div>
+</div>
 
 </body>
+
 @section Scripts {
 <script>
-       
+
+    //Takes the selected search or filter and applies it to the list of events
     function applySortFilter() {
         var search = document.getElementById('searchInput').value;
         var category = document.getElementById('categorySearch').value;
         var sortOrder = document.getElementById('sortSelect').value;
         var date = document.getElementById('datePicker').value;
-
-            window.location.href = `@Url.Action("Events")?search=${encodeURIComponent(search)}&categorySearch=${encodeURIComponent(category)}&sortOrder=${encodeURIComponent(sortOrder)}&date=${encodeURIComponent(date)}`;
+        window.location.href = `@Url.Action("Events")?search=${encodeURIComponent(search)}&categorySearch=${encodeURIComponent(category)}&sortOrder=${encodeURIComponent(sortOrder)}&date=${encodeURIComponent(date)}`;
     }
 
+    //Sends event to recently viewed list and allows the user to view each event details in a popup
     function viewEventAndShowModal(eventName, category, date, location, description, imgPath) {
         fetch('@Url.Action("ViewEvent")', {
             method: 'POST',
@@ -195,17 +186,30 @@
         document.getElementById('modalDescription').innerText = description;
 
         var img = document.getElementById('modalImage');
-        if (imgPath) { img.src = imgPath; img.style.display = 'block'; }
-        else { img.style.display = 'none'; }
+
+        if (imgPath) 
+        { 
+            img.src = imgPath; img.style.display = 'block'; 
+        }
+        else { 
+            img.style.display = 'none'; 
+        }
 
         var modal = new bootstrap.Modal(document.getElementById('eventModal'));
         modal.show();
     }
-         function clearFilters() {
-                document.getElementById('searchInput').value = '';
-                document.getElementById('categorySearch').value = '';
-                document.getElementById('datePicker').value = '';
-                document.getElementById('sortSelect').value = '';
-                window.location.href = '@Url.Action("Events")';}
+     
+    //Clears all the inputs from the search and filters
+    function clearFilters() 
+    {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('categorySearch').value = '';
+        document.getElementById('datePicker').value = '';
+        document.getElementById('sortSelect').value = '';
+        window.location.href = '@Url.Action("Events")';
+    }
 </script>
 }
+
+//Reference:
+//OpenAI, 2025. ChatGPT (Version GPT-5 mini).[Large language model].Available at: https://chatgpt.com/c/68cd30d8-86c4-8323-866a-e2bc1d538387 [Accessed: 13 October 2025]. 
