@@ -1,4 +1,7 @@
-﻿@model List<Municipal_Services_Portal.Models.Event>
+﻿<!--Reference:
+OpenAI, 2025. ChatGPT (Version GPT-5 mini).[Large language model].Available at: https://chatgpt.com/c/68cd30d8-86c4-8323-866a-e2bc1d538387 [Accessed: 13 October 2025].
+-->
+@model List<Municipal_Services_Portal.Models.Event>
 
 @{
     ViewData["Title"] = "Local Events";
@@ -16,7 +19,7 @@
 
 <div class="container mt-4">
     <div class="events-header">
-        <h1>Upcoming Events</h1>
+        <h1>Upcoming Local Events</h1>
     </div>
     <div class="row">
         <div class="col-lg-9">
@@ -36,7 +39,7 @@
                         }
                     }
                 </select>
-                <input type="text" id="searchInput" placeholder="Search By Event Name" class="form-control" value="@currentSearch" />
+                <input type="text" id="searchInput" placeholder="Search By Name" class="form-control" value="@currentSearch" />
                 <select id="sortSelect" class="form-control">
                     <option value="">Sort By</option>
                     <option value="dateAscending" selected="@(currentSort == "dateAscending")">Date Ascending</option>
@@ -47,7 +50,7 @@
                     <option value="categoryDescending" selected="@(currentSort == "categoryDescending")">Category Z to A</option>
                 </select>
                 <button class="btn-cta mt-auto" onclick="applySortFilter()">Apply</button>
-                <button class="btn btn-secondary mt-2" onclick="clearFilters()">Clear</button>
+                <button class="btn-cta mt-auto" onclick="clearFilters()">Clear</button>
             </div>
 
             <div id="eventsGrid" class="row custom-events-grid">
@@ -211,5 +214,3 @@
 </script>
 }
 
-//Reference:
-//OpenAI, 2025. ChatGPT (Version GPT-5 mini).[Large language model].Available at: https://chatgpt.com/c/68cd30d8-86c4-8323-866a-e2bc1d538387 [Accessed: 13 October 2025]. 
