@@ -9,6 +9,7 @@
     var currentSort = ViewBag.CurrentSort as string ?? "";
     var suggestedEvents = ViewBag.SuggestedEvents as List<Event> ?? new List<Event>();
     var announcements = ViewBag.Announcements as List<Announcement> ?? new List<Announcement>();
+    var date = ViewBag.CurrentDate as string ?? "";
 }
 
 <body class="events">
@@ -20,9 +21,11 @@
     <div class="row">
         <div class="col-lg-9">
             <div class="mb-4 d-flex gap-2">
-                <input type="text" id="searchInput" placeholder="Search by name..." class="form-control" value="@currentSearch" />
-                <select id="categorySelect" class="form-control">
-                    <option value="">All Categories</option>
+                    <input type="date" id="datePicker"  class="form-control" value="@date" />
+
+               
+                <select id="categorySearch" class="form-control">
+                    <option value="">Search By Category</option>
                     @foreach (var category in categories)
                     {
                         if (category == currentCategory)
@@ -37,6 +40,8 @@
 
 
                 </select>
+                    <input type="text" id="searchInput" placeholder="Search By Event Name" class="form-control" value="@currentSearch" />
+
                 <select id="sortSelect" class="form-control">
                     <option value="">Sort By</option>
                     <option value="dateAsc" selected="@(currentSort == "dateAsc")">Date ↑</option>
@@ -49,6 +54,7 @@
 
 
                 <button class="btn-cta mt-auto" onclick="applySortFilter()">Apply</button>
+                    <button class="btn btn-secondary mt-2" onclick="clearFilters()">Clear</button>
             </div>
 
             <div id="eventsGrid" class="row custom-events-grid">
@@ -92,7 +98,7 @@
                     {
                         foreach (var suggestedEvent in suggestedEvents)
                         {
-                            <li class="list-group-item" style="border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.15); margin-5">
+                            <li class="list-group-item" style="border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.15); margin-5;">
                                 @suggestedEvent.eventName - @suggestedEvent.Date.ToString("dd MMM")
                             </li>
                         }
@@ -150,12 +156,14 @@
 </body>
 @section Scripts {
 <script>
+       
     function applySortFilter() {
         var search = document.getElementById('searchInput').value;
-        var category = document.getElementById('categorySelect').value;
+        var category = document.getElementById('categorySearch').value;
         var sortOrder = document.getElementById('sortSelect').value;
+        var date = document.getElementById('datePicker').value;
 
-        window.location.href = `@Url.Action("Events")?search=${encodeURIComponent(search)}&categoryFilter=${encodeURIComponent(category)}&sortOrder=${encodeURIComponent(sortOrder)}`;
+            window.location.href = `@Url.Action("Events")?search=${encodeURIComponent(search)}&categorySearch=${encodeURIComponent(category)}&sortOrder=${encodeURIComponent(sortOrder)}&date=${encodeURIComponent(date)}`;
     }
 
     function viewEventAndShowModal(eventName, category, date, location, description, imgPath) {
@@ -193,5 +201,11 @@
         var modal = new bootstrap.Modal(document.getElementById('eventModal'));
         modal.show();
     }
+         function clearFilters() {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('categorySearch').value = '';
+                document.getElementById('datePicker').value = '';
+                document.getElementById('sortSelect').value = '';
+                window.location.href = '@Url.Action("Events")';}
 </script>
 }

@@ -766,7 +766,7 @@ body.events {
 
 .announcement-card {
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     background-color: #f9f9f9;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
